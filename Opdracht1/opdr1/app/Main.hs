@@ -1,16 +1,16 @@
 module Main where
 
+main :: IO ()
+
 -- opdracht 1a
--- main :: IO ()
--- fact :: (Eq t, Num t) => t -> t
--- fact 0 = 1
--- fact x = x * fact(x-1)
--- main = print (fact 4)
+facb :: (Eq t, Num t) => t -> t
+facb 0 = 1
+facb x = x * facb(x-1)
+
 
 -- opdracht 1b
-main :: IO ()
-fact :: (Eq t, Num t, Ord t) => t -> t
-fact factorial
+faca :: (Eq t, Num t, Ord t) => t -> t
+faca factorial
   | factorial <= 0 = 1
-  | otherwise = factorial * fact(factorial-1)
-main = print (fact 5)
+  | otherwise = factorial * facb(factorial-1)
+main = print (faca 5,facb 5)
