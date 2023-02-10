@@ -1,4 +1,22 @@
 module Main where
 
 main :: IO ()
-main = putStrLn "Hello, Haskell!"
+
+-- a :: Double -> Double -> Double
+-- b :: Double -> Double -> Double
+-- c :: Double -> Double -> Double
+
+
+-- a b c = 2 * (b - c)
+-- b a c = a * c
+-- c a b = (a + b) / 2
+-- ??????????
+calculateResult :: (Floating a, Eq a) => (a, a, a) -> (a, a, a)
+calculateResult (a, b, c) =
+  let (a', b', c') = (2 * (b - c), a * c, (a + b) / 2)
+  in if a == a' && b == b' && c == c'
+    then (a, b, c)
+    else calculateResult (a', b', c')
+
+main = print (calculateResult (1, 2, 3))
+
