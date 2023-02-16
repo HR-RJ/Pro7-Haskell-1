@@ -15,15 +15,6 @@ nulpuntena a b c
 countd:: Int -> [(Int,Int,Int)]
 countd n = [ (a,b,c) | a <- [1..20], b <- [1..20], c <- [1..20], mod (a+b+c) n ==0 ]
 
--- opdr3:: Int-> Int-> Int -> [Double]
--- opdr3 a b c = [a,b,c]
---     where
---         a = 2*(b-c)
---         b = a*c 
---         c = (a+b)/2
-
-        
-
 
 -- countShitshow:: Int -> Int
 -- countShitshow n
@@ -33,5 +24,5 @@ countd n = [ (a,b,c) | a <- [1..20], b <- [1..20], c <- [1..20], mod (a+b+c) n =
 --     where  
 --         a = elem [1..20] + countShitshow (n-1)
 
-main = print(opdr3 1 1 1)
+main = print(countd 3)
 
