@@ -7,7 +7,7 @@ nulpuntena a b c
     | otherwise = [(-b+sqrt d)/(2*a),
                     (-b-sqrt d)/(2*a)]
 
-    where d = (b^2 - 4*a*c)
+    where d = b^2 - 4*a*c
 
 -- 2c
 -- let results =length [ (a,b,c) | a <- [1..20], b <- [1..20], c <- [1..20], mod (a+b+c) 5 ==0 ]

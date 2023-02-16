@@ -21,6 +21,6 @@ fastpow x y
   | even y = fastpow (fastmult x x) (shift y (-1))
   | otherwise = x * fastpow (fastmult x x) (shift y (-1))
 
-main = print(fastpow 2 2147483647)
+main = print(fastpow 2 1000000)
 
--- after like half an hour of processing and over 95GB of Memory we decided to end the computer's suffering/program
+-- after like half an hour of processing and over 95GB of Memory we decided to end the computer's suffering/program instead of finding the stackoverflow
