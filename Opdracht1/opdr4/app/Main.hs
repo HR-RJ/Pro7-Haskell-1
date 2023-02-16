@@ -2,6 +2,7 @@ module Main where
 
 main :: IO ()
 
-mult::(num t) => Integer->Integer->Integer
+mult::Integer->Integer->Integer
+mult x y = x + mult x (y-1)
 
-main = putStrLn "Hello, Haskell!"
+main = print (mult 4 5)
