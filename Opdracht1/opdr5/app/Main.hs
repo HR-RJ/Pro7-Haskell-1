@@ -1,5 +1,5 @@
 module Main where
-import Data.Bits
+import Data.Bits ( Bits(shift) )
 main :: IO ()
 functiepow::Integer->Integer->Integer
 functiepow x y

@@ -1,6 +1,6 @@
 module Main where
 
-import Data.Bits
+import Data.Bits ( Bits(shift) )
 main :: IO ()
 
 mult::Integer->Integer->Integer
