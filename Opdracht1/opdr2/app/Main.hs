@@ -12,8 +12,9 @@ nulpuntena a b c
 -- 2c
 -- let results =length [ (a,b,c) | a <- [1..20], b <- [1..20], c <- [1..20], mod (a+b+c) 5 ==0 ]
 
-countd:: Int -> [(Int,Int,Int)]
-countd n = [ (a,b,c) | a <- [1..20], b <- [1..20], c <- [1..20], mod (a+b+c) n ==0 ]
+-- countd:: Int -> [(Int,Int,Int)]
+countd:: Int -> Int
+countd n = length [(a,b,c) | a <- [1..20], b <- [1..20], c <- [1..20], mod (a+b+c) n ==0 ]
 
 
 -- countShitshow:: Int -> Int
@@ -24,5 +25,5 @@ countd n = [ (a,b,c) | a <- [1..20], b <- [1..20], c <- [1..20], mod (a+b+c) n =
 --     where  
 --         a = elem [1..20] + countShitshow (n-1)
 
-main = print(countd 3)
+main = print(countd 5)
 
