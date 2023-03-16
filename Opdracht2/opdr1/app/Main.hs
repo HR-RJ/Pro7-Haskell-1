@@ -25,10 +25,18 @@ euclid x y
 --     let (g, s, t) = egcd (mod b a) a
 --     in (g, t - div b a * s, s)
     
-eGCD :: Integer -> Integer -> (Integer, Integer, Integer)
-eGCD 0 b = (b, 0, 1)
-eGCD a b = let (g, s, t) = eGCD (b `mod` a) a
+eGCD :: Integer -> Integer -> Integer -> (Integer, Integer, Integer)
+eGCD 0 b c = (b, 0, 1)
+eGCD a b 0 = let (g, s, t) = eGCD (b `mod` a) a 0
        in (g, t - (b `div` a) * s, s)
+eGCD a b 1 = let (g, s, t) = eGCD (b `mod` a) a 0 in
+      if s < 0 then 
+        (g, t - (b `div` a) * s, s + a)
+      else if t < 0 then
+        (g, (t - (b `div` a) * s) + b, s)
+      else 
+        (g, t - (b `div` a) * s, s)
+
 
 -- original
 --egcd :: Integer -> Integer -> (Integer,Integer,Integer)
@@ -49,5 +57,4 @@ eGCD a b = let (g, s, t) = eGCD (b `mod` a) a
 --         k = (s * a + t * b) `div` g
 --     in (g, (t - (b `div` g) * s) `mod` (b `div` g), (s + (a `div` g) * k) `mod` (b `div` g))
 
-
-main = print ({-euclid 1024 4096-} eGCD 1235 5238)
+main = print ({-euclid 1024 4096-} eGCD 1235 5238 1)
