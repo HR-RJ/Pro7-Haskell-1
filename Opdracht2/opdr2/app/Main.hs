@@ -34,5 +34,5 @@ keygen p q = (m, e, d)
         e = head [e | e <-[2..], e <= phiM && gcd e phiM == 1]
         d = head [d | d <-[2..], d <= phiM && gcd d phiM == 1, e * d `mod` phiM == 1]
 
-main = print (keygen 7 13) 
+main = print (keygen 101 107) 
 -- main = mapM_ print [5 `modInv` 72, 42 `modInv` 2017]

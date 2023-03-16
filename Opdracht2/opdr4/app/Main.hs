@@ -10,7 +10,7 @@ rsaencrypt (e,m) x
 rsadecrypt::(Integer,Integer)->Integer->Integer
 rsadecrypt (d,m) x 
     | x < m = x^d `mod` m
-    | otherwise = error "x is too big"
+    | otherwise = x^d  
 
 encryptChar::(Integer,Integer)->Char->Integer
 encryptChar (e,m) x = rsaencrypt (e,m) (toInteger (fromEnum x))
@@ -18,4 +18,4 @@ encryptChar (e,m) x = rsaencrypt (e,m) (toInteger (fromEnum x))
 decryptChar::(Integer,Integer)->Integer->Char
 decryptChar (d,m) x = toEnum (fromInteger (rsadecrypt (d,m) x))
 
-main = print(encryptChar (5,91) 'K', decryptChar(29,91) 17)
+main = print(encryptChar (10807,3) 'K', decryptChar(10807,3) 17)
