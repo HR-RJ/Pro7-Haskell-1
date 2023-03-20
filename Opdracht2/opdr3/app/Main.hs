@@ -2,24 +2,13 @@ module Main where
 
 main :: IO ()
 
-keygen :: Integer -> Integer -> (Integer, Integer, Integer)
-keygen p q = (m, e, d)
-    where
-        m = p * q
-        phiM = (p - 1) * (q - 1)
-        e = head [e | e <-[2..], e <= phiM && gcd e phiM == 1]
-        d = head [d | d <-[2..], d <= phiM && gcd d phiM == 1, e * d `mod` phiM == 1]
-
 rsaencrypt::(Integer,Integer)->Integer->Integer
-rsaencrypt (e,m) x 
-    | x < m = x^e `mod` m
-    | otherwise = error "x is too big"
+rsaencrypt (e,m) x = x^e `mod` m
+
 
 rsadecrypt::(Integer,Integer)->Integer->Integer
-rsadecrypt (d,m) x 
-    | x < m = x^d `mod` m
-    | otherwise = error "x is too big"
+rsadecrypt (d,m) x = x^d `mod` m
 
 
 
-main = print(rsaencrypt (5,91) 75, rsadecrypt(29,91) 17)
+main = print(rsaencrypt (3,10807) 75, rsadecrypt(7067,10807) 402)

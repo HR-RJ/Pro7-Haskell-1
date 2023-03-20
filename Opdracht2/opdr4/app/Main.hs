@@ -18,4 +18,4 @@ encryptChar (e,m) x = rsaencrypt (e,m) (toInteger (fromEnum x))
 decryptChar::(Integer,Integer)->Integer->Char
 decryptChar (d,m) x = toEnum (fromInteger (rsadecrypt (d,m) x))
 
-main = print(encryptChar (10807,3) 'K', decryptChar(10807,3) 17)
+main = print(encryptChar (3,10807) 'K', decryptChar(7067,10807) 402)

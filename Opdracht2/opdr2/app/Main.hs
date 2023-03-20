@@ -1,30 +1,20 @@
 module Main where
 
-import Data.Fixed
 main :: IO ()
 
--- Given a and m, return Just x such that ax = 1 mod m.
--- If there is no such x return Nothing.
--- modInv :: Integer -> Integer -> Maybe Integer
--- modInv a m
---   | 1 == g = Just (mkPos i)
---   | otherwise = Nothing
---   where
---     (i, _, g) = gcdExt a m
---     mkPos x
---       | x < 0 = x + m
---       | otherwise = x
+eGCD :: Integer -> Integer -> Integer -> [Integer]
+eGCD 0 b c = [b, 0, 1]
+eGCD a b 0 = let [g, s, t] = eGCD (b `mod` a) a 0
+       in [g, t - (b `div` a) * s, s]
+eGCD a b 1 = do
+         let [g, s, t] = eGCD (b `mod` a) a 0 in
+          makePos[g, t - (b `div` a) * s, s] a b
 
--- -- Extended Euclidean algorithm.
--- -- Given non-negative a and b, return x, y and g
--- -- such that ax + by = g, where g = gcd(a,b).
--- -- Note that x or y may be negative.
--- gcdExt :: Int -> Int -> (Int, Int, Int)
--- gcdExt a 0 = (1, 0, a)
--- gcdExt a b =
---   let (q, r) = a `quotRem` b
---       (s, t, g) = gcdExt b r
---   in (t, s - q * t, g)
+makePos :: [Integer] -> Integer -> Integer -> [Integer]
+makePos [a, b, c] e f
+      | b < 0 = makePos [a, b + f, c] e f
+      | c < 0 = makePos [a, b, c + e] e f
+      | otherwise = [a,b,c]
 
 keygen :: Integer -> Integer -> (Integer, Integer, Integer)
 keygen p q = (m, e, d)
@@ -32,7 +22,15 @@ keygen p q = (m, e, d)
         m = p * q
         phiM = (p - 1) * (q - 1)
         e = head [e | e <-[2..], e <= phiM && gcd e phiM == 1]
-        d = head [d | d <-[2..], d <= phiM && gcd d phiM == 1, e * d `mod` phiM == 1]
+        d = eGCD e phiM 1 !! 1
+
+
+-- keygen :: Integer -> Integer -> (Integer, Integer, Integer)
+-- keygen p q = (m, e, d)
+--     where
+--         m = p * q
+--         phiM = (p - 1) * (q - 1)
+--         e = head [e | e <-[2..], e <= phiM && gcd e phiM == 1]
+--         d = head [d | d <-[2..], d <= phiM && gcd d phiM == 1, e * d `mod` phiM == 1]
 
 main = print (keygen 101 107) 
--- main = mapM_ print [5 `modInv` 72, 42 `modInv` 2017]
