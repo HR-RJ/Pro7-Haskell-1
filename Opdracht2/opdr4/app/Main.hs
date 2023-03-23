@@ -5,12 +5,10 @@ main :: IO ()
 rsaencrypt::(Integer,Integer)->Integer->Integer
 rsaencrypt (e,m) x 
     | x < m = x^e `mod` m
-    | otherwise = error "x is too big"
 
 rsadecrypt::(Integer,Integer)->Integer->Integer
 rsadecrypt (d,m) x 
     | x < m = x^d `mod` m
-    | otherwise = x^d  
 
 encryptChar::(Integer,Integer)->Char->Integer
 encryptChar (e,m) x = rsaencrypt (e,m) (toInteger (fromEnum x))
