@@ -31,3 +31,5 @@ arguments = do
 main = do
     arguments
     print("Done")
+
+        -- cabal run exes -- image.txt compress.txt
