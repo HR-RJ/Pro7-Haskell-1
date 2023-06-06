@@ -49,6 +49,6 @@ main = do
     -- let rawContents = "Dit is een test met 1234321"
     -- print (huffmanTable (huffmanTree (countChars rawContents) Empty))
     -- let huffTree = huffmanTree rawContents
-    --writeFile treeFile (show (mapTree fromEnum huffTree))
+    -- writeFile treeFile (show (mapTree fromEnum huffTree))
     -- print (huffmanCompress (huffmanTable (huffmanTree (countChars rawContents) Empty)) rawContents)
     putStrLn "Finished compression"

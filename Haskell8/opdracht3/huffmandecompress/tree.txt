@@ -1,0 +1,1 @@
+Branch (Leaf ' ') 27 (Branch (Leaf 't') 22 (Branch (Leaf 'e') 18 (Branch (Leaf 's') 14 (Branch (Leaf 'i') 12 (Branch (Leaf '3') 10 (Branch (Leaf '2') 8 (Branch (Leaf '1') 6 (Branch (Leaf 'n') 4 (Branch (Leaf 'm') 3 (Branch (Leaf 'D') 2 (Leaf '4')))))))))))
