@@ -13,6 +13,10 @@ checkVal :: Bintree a -> Int
 checkVal Empty = 0
 checkVal (Branch t1 v t2) = v
 
+etree = importTree "Branch (Leaf ' ') 27 (Branch (Leaf 't') 22 (Branch (Leaf 'e') 18 (Branch (Leaf 's') 14 (Branch (Leaf 'i') 12 (Branch (Leaf '3') 10 (Branch (Leaf '2') 8 (Branch (Leaf '1') 6 (Branch (Leaf 'n') 4 (Branch (Leaf 'm') 3 (Branch (Leaf 'D') 2 (Leaf '4')))))))))))"
+estring = "111111111101111010011110111001101101111111100101101110100111111111011010011111110111111011111011111111111111110111111011111110"
+eresult = "1234321"
+
 huffmanTree :: [(Char, Int)] -> Bintree a -> Bintree a
 huffmanTree [] final = final
 huffmanTree ((lowest, lowCount):(lessLowest, lessLowCount):tail) Empty = huffmanTree tail (Branch (Leaf lessLowest) (lowCount + lessLowCount) (Leaf lowest))
@@ -46,6 +50,7 @@ decompress [] _ = []
 decompress xs tree = decompressHelper xs tree
   where
     decompressHelper :: String -> Bintree a -> String
+    decompressHelper [] (Leaf c) = [c]
     decompressHelper [] _ = []
     decompressHelper xs (Leaf c) = c : decompress xs tree
     decompressHelper (x:xs) (Branch l _ r)
@@ -88,8 +93,8 @@ main = do
 
     let tree = importTree treeFile
     print tree
-
-    print (isValidHuffmanTree tree)
+    print inputFile
+    -- print (isValidHuffmanTree tree)
     -- let table = huffmanTable tree
     -- print table
     let d = decompress inputFile tree
