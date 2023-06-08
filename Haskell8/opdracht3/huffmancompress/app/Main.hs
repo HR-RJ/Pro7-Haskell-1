@@ -10,6 +10,13 @@ data Bintree a = Empty
     | Leaf Char
     deriving (Show, Eq, Ord, Read)
 
+-- push :: (Ord a) => Bintree a -> (Char, Int) -> Bintree a
+-- push Empty (char, val) = Leaf char
+-- push (Branch t1 v t2) (char, val)
+--     | val == v = Branch t1 v (push t2 (char,val))
+--     | val > v = Branch t1 v (push t2 (char, val))
+--     | val < v = Branch (push t1 (char, val)) v t2
+
 -- sorts a list of tuples containing each unique character and the amount of times it occurs
 countChars :: String -> [(Char, Int)]
 countChars = sortBy (\(_,a) (_,b) -> compare a b) . map (\x -> (head x, length x)) . group . sort -- . go brr
@@ -39,10 +46,10 @@ main = do
     putStrLn "Please enter the file to be compressed:"
     inputFile <- getLine
     rawContents <- readFile inputFile
-
     putStrLn "Please enter the output file to compress to:"
     outputFile <- getLine
-    writeFile outputFile (show (huffmanCompress (huffmanTable (huffmanTree (countChars rawContents) Empty)) rawContents))
+    let outputContent = huffmanCompress (huffmanTable (huffmanTree (countChars rawContents) Empty)) rawContents
+    writeFile outputFile outputContent
     putStrLn "Please enter the file to write the huffman tree to:"
     treeFile <- getLine
     writeFile treeFile (show  (huffmanTree (countChars rawContents) Empty))
@@ -51,4 +58,22 @@ main = do
     -- let huffTree = huffmanTree rawContents
     -- writeFile treeFile (show (mapTree fromEnum huffTree))
     -- print (huffmanCompress (huffmanTable (huffmanTree (countChars rawContents) Empty)) rawContents)
+    let inputLength = length rawContents
+    let outputBits = length outputContent
+    let inputBits = inputLength * 8
+    putStr "Input character count: "
+    print inputLength
+    putStr "Bits of input: "
+    print inputBits
+    putStr "Bits of output: "
+    print outputBits
+    putStr "Compression ratio in percentage: "
+    print ((fromIntegral outputBits / fromIntegral inputBits)*100)
+
+    -- putStr "Length of input: "
+    -- print inputLength
+    -- putStr "Length of output: "
+    -- print outputLenght
+    -- putStr "Compression ratio: "
+    -- print (fromIntegral outputLenght / fromIntegral inputLength)
     putStrLn "Finished compression"

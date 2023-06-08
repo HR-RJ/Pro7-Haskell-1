@@ -44,10 +44,10 @@ inorder (Branch t1 v t2) = inorder t1 ++ [v] ++ inorder t2
 
 main :: IO ()
 main = do
-    putStrLn "Please enter the file to be compressed:"
+    putStrLn "Please enter the inputfile:"
     inputFile <- getLine
 
-    putStrLn "Please enter the output file to compress to:"
+    putStrLn "Please enter the file to put the tree in:"
     outputFile <- getLine
     contents <- readFile inputFile
     -- print contents
