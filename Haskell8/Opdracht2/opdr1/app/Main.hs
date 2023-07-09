@@ -3,10 +3,6 @@ import GHC.Generics
 
 main :: IO ()
 
--- maybe implements or derives int? -- not completely sure what that changes to be more exact
--- lets keep this for now
---type Value = Integer
-
 data Bintree a = Empty
     | Branch  (Bintree a) a (Bintree a)
     deriving (Show, Eq, Ord) -- ?
@@ -16,9 +12,6 @@ data Bintree a = Empty
 -- http://learnyouahaskell.com/making-our-own-types-and-typeclasses#algebraic-data-types
 
 
--- hmmm, shits fucked yo. is our Bintree generic? -- prolly now -- ye
--- alle functies zijn random bullshit that copilot hallucinated so shrug
-
 push :: (Ord a) => Bintree a -> a -> Bintree a
 push Empty a = Branch Empty a Empty
 push (Branch t1 v t2) val
@@ -26,11 +19,8 @@ push (Branch t1 v t2) val
     | val > v = Branch t1 v (push t2 val)
     | val < v = Branch (push t1 val) v t2
 
--- maybe?
-
 pushList :: (Ord a) => Bintree a -> [a] -> Bintree a
 pushList tree [] = tree
--- pushList tree list = fmap (push (Branch  (Empty) 5 (Empty))) [tree]
 pushList tree (head:rest) = pushList (push tree head) rest
 
 mapTree :: (a -> b) -> Bintree a -> Bintree b

@@ -10,12 +10,6 @@ data Bintree a = Empty
     | Leaf Char
     deriving (Show, Eq, Ord, Read)
 
--- push :: (Ord a) => Bintree a -> (Char, Int) -> Bintree a
--- push Empty (char, val) = Leaf char
--- push (Branch t1 v t2) (char, val)
---     | val == v = Branch t1 v (push t2 (char,val))
---     | val > v = Branch t1 v (push t2 (char, val))
---     | val < v = Branch (push t1 (char, val)) v t2
 
 -- sorts a list of tuples containing each unique character and the amount of times it occurs
 countChars :: String -> [(Char, Int)]
@@ -25,7 +19,6 @@ huffmanTree :: [(Char, Int)] -> Bintree a -> Bintree a
 huffmanTree [] final = final
 huffmanTree ((lowest, lowCount):(lessLowest, lessLowCount):tail) Empty = huffmanTree tail (Branch (Leaf lessLowest) (lowCount + lessLowCount) (Leaf lowest))
 huffmanTree ((lowest, lowCount):tail) prevTree = huffmanTree tail (Branch (Leaf lowest) (lowCount + checkVal prevTree) prevTree)
--- huffmanTree [(lowest, lowCount)] final = final
 
 checkVal :: Bintree a -> Int
 checkVal Empty = 0
